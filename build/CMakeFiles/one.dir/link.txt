@@ -1,3 +1,0 @@
-D:\program\cmake-3.20.1-windows-x86_64\bin\cmake.exe -E rm -f CMakeFiles\one.dir/objects.a
-D:\program\mingw\mingw64\bin\ar.exe cr CMakeFiles\one.dir/objects.a @CMakeFiles\one.dir\objects1.rsp
-D:\program\mingw\mingw64\bin\x86_64-w64-mingw32-g++.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\one.dir/objects.a -Wl,--no-whole-archive -o one.exe -Wl,--out-implib,libone.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\one.dir\linklibs.rsp
