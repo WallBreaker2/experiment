@@ -1,0 +1,6 @@
+D:/code/one/bin/one.exe
+D:/code/one/lib/libutil.dll.a
+D:/code/one/bin/libutil.dll
+D:/code/one/lib/libutil_static.a
+D:/code/one/include/util.h
+D:/code/one/bin/testing.exe

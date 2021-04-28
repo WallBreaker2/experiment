@@ -1,0 +1,5 @@
+add_executable(testing test.cpp)
+
+target_include_directories(testing INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+
+install(TARGETS testing DESTINATION "${PROJECT_SOURCE_DIR}/bin")

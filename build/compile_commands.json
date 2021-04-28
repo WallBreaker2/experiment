@@ -1,0 +1,22 @@
+[
+{
+  "directory": "D:/code/one/build",
+  "command": "D:\\program\\mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/one.dir/includes_CXX.rsp -O3 -DNDEBUG -std=gnu++11 -o CMakeFiles\\one.dir\\src\\main.cpp.obj -c D:\\code\\one\\src\\main.cpp",
+  "file": "D:/code/one/src/main.cpp"
+},
+{
+  "directory": "D:/code/one/build/util",
+  "command": "D:\\program\\mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -Dutil_EXPORTS  -O3 -DNDEBUG -o CMakeFiles\\util.dir\\util.cpp.obj -c D:\\code\\one\\util\\util.cpp",
+  "file": "D:/code/one/util/util.cpp"
+},
+{
+  "directory": "D:/code/one/build/util",
+  "command": "D:\\program\\mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -O3 -DNDEBUG -o CMakeFiles\\util_static.dir\\util.cpp.obj -c D:\\code\\one\\util\\util.cpp",
+  "file": "D:/code/one/util/util.cpp"
+},
+{
+  "directory": "D:/code/one/build/testing",
+  "command": "D:\\program\\mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -O3 -DNDEBUG -o CMakeFiles\\testing.dir\\test.cpp.obj -c D:\\code\\one\\testing\\test.cpp",
+  "file": "D:/code/one/testing/test.cpp"
+}
+]

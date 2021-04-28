@@ -1,0 +1,1 @@
+ping www.baidu.com <ip.txt >ping.txt

@@ -1,0 +1,2 @@
+D:\program\mingw\mingw64\bin\ar.exe qc libutil_static.a CMakeFiles/util_static.dir/util.cpp.obj
+D:\program\mingw\mingw64\bin\ranlib.exe libutil_static.a
