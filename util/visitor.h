@@ -18,6 +18,7 @@ template<class IteratorType,class F>
 void slide_window(std::pair<IteratorType,IteratorType> lefttop,
                     std::pair<IteratorType,IteratorType> rightbottom,
                     F f, window2d_t window){
+                        using iterator_t = std::pair<IteratorType,IteratorType>;
     size_t diffx = rightbottom.first - lefttop.first;
     size_t diffy = rightbottom.second - lefttop.second;
     if(diffx < window.first || diffy < window.second){
@@ -27,7 +28,8 @@ void slide_window(std::pair<IteratorType,IteratorType> lefttop,
     size_t slidey = diffy - window.second + 1;
     for(size_t y = 0; y < slidey; ++y){
         for(size_t x = 0; x < slidex; ++x){
-            f(lefttop,rightbottom);
+            f(lefttop,
+            iterator_t(lefttop.first + window.first,lefttop.second + window.second));
             ++lefttop.first;
         }
         ++lefttop.second;
