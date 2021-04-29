@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../util/visitor.h"
-
+#include "tree_layout.h"
 int main(int argc, char* argv[]){
     int a[10]={1,2,3,4,5,6,7,8,9,10};
     slide_window(a,a+10,
@@ -24,5 +24,20 @@ int main(int argc, char* argv[]){
                         std::cout<<"s:"<<s<<" ";
                     },
                 wd);
+    std::cout<<std::endl;
+    node_t root(rect_t(0,0,100,100));
+    tree_layout tl;
+    tl.print(&root);
+    node_t child1(&root, MarginDesc(MarginDesc::Inner,rect_t(20)));
+    node_t child2(&root, MarginDesc(MarginDesc::Outer,rect_t(20)));
+    node_t child_left(&root, MarginDesc(MarginDesc::Left,rect_t(20)));
+    node_t child_right(&root, MarginDesc(MarginDesc::Right,rect_t(20)));
+    node_t child_bottom(&root, MarginDesc(MarginDesc::Bottom,rect_t(20)));
+    node_t child_top(&root, MarginDesc(MarginDesc::Top,rect_t(20)));
+    std::cout<<"before eval:\n";
+    tl.print(&root);
+    std::cout<<"after eval:\n";
+    tl.apply(&root);
+    tl.print(&root);
     return 0;
 }
