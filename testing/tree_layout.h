@@ -51,78 +51,80 @@ struct node_t{
     ~node_t(){}
 
     void eval(){
+        if(!m_parent)return;
         rect_t par = m_parent->rect;
-        MarginDesc& desc = m_desc;
-        if(desc.type == MarginDesc::Inner){
-            rect.left = par.left + desc.margin.left;
-            rect.bottom = par.bottom + desc.margin.bottom;
-            rect.right = par.right - desc.margin.right;
-            rect.top = par.top - desc.margin.top;
-        }else if(desc.type == MarginDesc::Outer){
-            rect.left = par.left - desc.margin.left;
-            rect.bottom = par.bottom - desc.margin.bottom;
-            rect.right = par.right + desc.margin.right;
-            rect.top = par.top + desc.margin.top;
-        }else if(desc.type == MarginDesc::Left){
-            rect.left = par.left - desc.margin.left;
-            rect.bottom = par.bottom + desc.margin.bottom;
-            rect.right = par.left - desc.margin.right;
-            rect.top = par.top + desc.margin.top;
-        }else if(desc.type == MarginDesc::Right){
-            rect.left = par.right + desc.margin.left;
-            rect.bottom = par.bottom + desc.margin.bottom;
-            rect.right = par.right + desc.margin.right;
-            rect.top = par.top + desc.margin.top;
-        }else if(desc.type == MarginDesc::Bottom){
-            rect.left = par.left + desc.margin.left;
-            rect.bottom = par.bottom - desc.margin.bottom;
-            rect.right = par.left + desc.margin.right;
-            rect.top = par.top - desc.margin.top;
-        }else if(desc.type == MarginDesc::Top){//top
-            rect.left = par.left + desc.margin.left;
-            rect.bottom = par.bottom + desc.margin.bottom;
-            rect.right = par.left + desc.margin.right;
-            rect.top = par.top + desc.margin.top;
-        }else if(desc.type == MarginDesc::ILeftBottom){
-            rect.left = par.left + desc.margin.left;
-            rect.bottom = par.bottom + desc.margin.bottom;
-            rect.right = rect.left + desc.margin.right;
-            rect.top = rect.bottom + desc.margin.top;
-        }else if(desc.type == MarginDesc::IRightBottom){
-            rect.left = par.right - desc.margin.left -desc.margin.right;
-            rect.bottom = par.bottom + desc.margin.bottom;
-            rect.right = rect.left + desc.margin.right;
-            rect.top = rect.bottom + desc.margin.top;
-        }else if(desc.type == MarginDesc::ILeftTop){
-            rect.left = par.left + desc.margin.left;
-            rect.bottom = par.top - desc.margin.bottom - desc.margin.top;
-            rect.right = rect.left + desc.margin.right;
-            rect.top = rect.bottom + desc.margin.top;
-        }else if(desc.type == MarginDesc::IRightTop){//top
-            rect.left = par.right - desc.margin.left -desc.margin.right;
-            rect.bottom = par.top - desc.margin.bottom - desc.margin.top;
-            rect.right = rect.left + desc.margin.right;
-            rect.top = rect.bottom + desc.margin.top;
-        }else if(desc.type == MarginDesc::OLeftBottom){
-           rect.left = par.right - desc.margin.left -desc.margin.right;
-            rect.bottom = par.bottom - desc.margin.bottom - desc.margin.top;
-            rect.right = rect.left + desc.margin.right;
-            rect.top = rect.bottom + desc.margin.top;
-        }else if(desc.type == MarginDesc::ORightBottom){
-           rect.left = par.right + desc.margin.left;
-            rect.bottom = par.bottom - desc.margin.bottom - desc.margin.top;
-            rect.right = rect.left + desc.margin.right;
-            rect.top = rect.bottom + desc.margin.top;
-        }else if(desc.type == MarginDesc::OLeftTop){
-           rect.left = par.left - desc.margin.left -desc.margin.right;
-            rect.bottom = par.top + desc.margin.bottom;
-            rect.right = rect.left + desc.margin.right;
-            rect.top = rect.bottom + desc.margin.top;
-        }else if(desc.type == MarginDesc::ORightTop){
-            rect.left = par.right + desc.margin.left;
-            rect.bottom = par.top + desc.margin.bottom;
-            rect.right = par.left + desc.margin.right;
-            rect.top = par.top + desc.margin.top;
+        rect_t mg = m_desc.margin;
+        int type = m_desc.type;
+        if(type == MarginDesc::Inner){
+            rect.left = par.left + mg.left;
+            rect.bottom = par.bottom + mg.bottom;
+            rect.right = par.right - mg.right;
+            rect.top = par.top - mg.top;
+        }else if(type == MarginDesc::Outer){
+            rect.left = par.left - mg.left;
+            rect.bottom = par.bottom - mg.bottom;
+            rect.right = par.right + mg.right;
+            rect.top = par.top + mg.top;
+        }else if(type == MarginDesc::Left){
+            rect.left = par.left - mg.left;
+            rect.bottom = par.bottom + mg.bottom;
+            rect.right = par.left - mg.right;
+            rect.top = par.top + mg.top;
+        }else if(type == MarginDesc::Right){
+            rect.left = par.right + mg.left;
+            rect.bottom = par.bottom + mg.bottom;
+            rect.right = par.right + mg.right;
+            rect.top = par.top + mg.top;
+        }else if(type == MarginDesc::Bottom){
+            rect.left = par.left + mg.left;
+            rect.bottom = par.bottom - mg.bottom;
+            rect.right = par.left + mg.right;
+            rect.top = par.top - mg.top;
+        }else if(type == MarginDesc::Top){//top
+            rect.left = par.left + mg.left;
+            rect.bottom = par.bottom + mg.bottom;
+            rect.right = par.left + mg.right;
+            rect.top = par.top + mg.top;
+        }else if(type == MarginDesc::ILeftBottom){
+            rect.left = par.left + mg.left;
+            rect.bottom = par.bottom + mg.bottom;
+            rect.right = rect.left + mg.right;
+            rect.top = rect.bottom + mg.top;
+        }else if(type == MarginDesc::IRightBottom){
+            rect.left = par.right - mg.left -mg.right;
+            rect.bottom = par.bottom + mg.bottom;
+            rect.right = rect.left + mg.right;
+            rect.top = rect.bottom + mg.top;
+        }else if(type == MarginDesc::ILeftTop){
+            rect.left = par.left + mg.left;
+            rect.bottom = par.top - mg.bottom - mg.top;
+            rect.right = rect.left + mg.right;
+            rect.top = rect.bottom + mg.top;
+        }else if(type == MarginDesc::IRightTop){//top
+            rect.left = par.right - mg.left -mg.right;
+            rect.bottom = par.top - mg.bottom - mg.top;
+            rect.right = rect.left + mg.right;
+            rect.top = rect.bottom + mg.top;
+        }else if(type == MarginDesc::OLeftBottom){
+           rect.left = par.left - mg.left -mg.right;
+            rect.bottom = par.bottom - mg.bottom - mg.top;
+            rect.right = rect.left + mg.right;
+            rect.top = rect.bottom + mg.top;
+        }else if(type == MarginDesc::ORightBottom){
+           rect.left = par.right + mg.left;
+            rect.bottom = par.bottom - mg.bottom - mg.top;
+            rect.right = rect.left + mg.right;
+            rect.top = rect.bottom + mg.top;
+        }else if(type == MarginDesc::OLeftTop){
+           rect.left = par.left - mg.left -mg.right;
+            rect.bottom = par.top + mg.bottom;
+            rect.right = rect.left + mg.right;
+            rect.top = rect.bottom + mg.top;
+        }else if(type == MarginDesc::ORightTop){
+            rect.left = par.right + mg.left;
+            rect.bottom = par.top + mg.bottom;
+            rect.right = rect.left + mg.right;
+            rect.top = rect.bottom + mg.top;
         }else{
             //do nothing
         }

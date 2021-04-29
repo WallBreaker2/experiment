@@ -34,6 +34,15 @@ int main(int argc, char* argv[]){
     node_t child_right(&root, MarginDesc(MarginDesc::Right,rect_t(20)));
     node_t child_bottom(&root, MarginDesc(MarginDesc::Bottom,rect_t(20)));
     node_t child_top(&root, MarginDesc(MarginDesc::Top,rect_t(20)));
+    node_t child_ilb(&root, MarginDesc(MarginDesc::ILeftBottom,rect_t(20)));
+    node_t child_irb(&root, MarginDesc(MarginDesc::IRightBottom,rect_t(20)));
+    node_t child_ilt(&root, MarginDesc(MarginDesc::ILeftTop,rect_t(20)));
+    node_t child_irt(&root, MarginDesc(MarginDesc::IRightTop,rect_t(20)));
+    node_t child_olb(&root, MarginDesc(MarginDesc::OLeftBottom,rect_t(20)));
+    node_t child_orb(&root, MarginDesc(MarginDesc::ORightBottom,rect_t(20)));
+    node_t child_olt(&root, MarginDesc(MarginDesc::OLeftTop,rect_t(20)));
+    node_t child_ort(&root, MarginDesc(MarginDesc::ORightTop,rect_t(20)));
+    node_t childc_o(&child_ort, MarginDesc(MarginDesc::Outer,rect_t(20)));
     std::cout<<"before eval:\n";
     tl.print(&root);
     std::cout<<"after eval:\n";
