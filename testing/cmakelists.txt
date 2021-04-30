@@ -1,4 +1,8 @@
-add_executable(testing test.cpp)
+set(SRC_FILES 
+"test.cpp"
+"tree_layout.cpp"
+)
+add_executable(testing ${SRC_FILES})
 
 target_include_directories(testing INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 

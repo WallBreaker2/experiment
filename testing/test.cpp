@@ -29,8 +29,7 @@ int main(int argc, char *argv[])
         wd);
     std::cout << std::endl;
     node_t root(rect_t(0, 0, 100, 100));
-    tree_layout tl;
-    tl.print(&root);
+    tree_layout::print(&root);
     node_t child1(&root, MarginDesc(MarginDesc::Inner, rect_t(20)));
     node_t child2(&root, MarginDesc(MarginDesc::Outer, rect_t(20)));
     node_t child_left(&root, MarginDesc(MarginDesc::Left, rect_t(20)));
@@ -47,10 +46,19 @@ int main(int argc, char *argv[])
     node_t child_ort(&root, MarginDesc(MarginDesc::ORightTop, rect_t(20)));
     node_t childc_o(&child_ort, MarginDesc(MarginDesc::Outer, rect_t(20)));
     std::cout << "before eval:\n";
-    tl.print(&root);
+    tree_layout::print(&root);
     std::cout << "after eval:\n";
-    tl.apply(&root);
-    tl.print(&root);
+    tree_layout::apply(&root);
+    tree_layout::print(&root);
 
+    tree_layout::restrict(&root,
+                          [](node_t *node) {
+                              std::cout << (*node) << "\n";
+                          });
+
+    for (iteraotr_t it = tree_layout::begin(&root); it != tree_layout::end(); ++it)
+    {
+        std::cout << (*it) << std::endl;
+    }
     return 0;
 }

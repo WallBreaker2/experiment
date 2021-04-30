@@ -2,6 +2,7 @@
 #define __TREE_LAYOUT_H
 #include <list>
 #include <iostream>
+#include <vector>
 struct rect_t
 {
     rect_t(int l, int b, int r, int t) : left(l), bottom(b), right(r), top(t)
@@ -48,7 +49,7 @@ struct node_t
     node_t(const rect_t &r) : rect(r), m_parent(nullptr) {}
     node_t(node_t *parent = nullptr, const MarginDesc &desc = MarginDesc()) : m_parent(parent), m_desc(desc)
     {
-        if (m_parent)
+        if (m_parent) //add child node to parent
         {
             m_parent->childs.push_back(this);
         }
@@ -167,47 +168,104 @@ struct node_t
     }
 };
 
-class tree_layout
+std::ostream &operator<<(std::ostream &os, const node_t &node);
+
+struct node_iterator
+{
+    node_t *node;
+    int branch;
+    node_iterator(node_t *p, int b = 0) : node(p), branch(b) {}
+};
+
+class iteraotr_t
 {
 public:
-    void clear(node_t *node)
+    iteraotr_t(node_t *begin = nullptr) : node(begin)
     {
-        if (node)
+        if (node != nullptr)
         {
-            for (node_t *pn : node->childs)
-            {
-                clear(pn);
-            }
-            delete node;
+            sk.push_back(node_iterator(node));
         }
     }
-    void apply(node_t *node)
+    iteraotr_t &operator++()
     {
-        if (node)
+        next();
+        return *this;
+    }
+    iteraotr_t operator++(int)
+    {
+        iteraotr_t tmp(*this);
+        next();
+        return tmp;
+    }
+    node_t *operator->()
+    {
+        return node;
+    }
+
+    node_t &operator*()
+    {
+        return *node;
+    }
+
+    bool operator==(const iteraotr_t &rhs)
+    {
+        return node == rhs.node;
+    }
+
+    bool operator!=(const iteraotr_t &rhs)
+    {
+        return !operator==(rhs);
+    }
+
+private:
+    void next()
+    {
+        while (!sk.empty())
         {
-            if (node->m_parent)
+
+            if (sk.back().branch < node->childs.size())
             {
-                node->eval();
+                node = *std::next(node->childs.begin(), sk.back().branch);
+                std::cout << " sk size:" << sk.size();
+                sk.push_back(node_iterator(node));
+                break;
             }
-            for (node_t *pn : node->childs)
+            else //leaf node
             {
-                apply(pn);
+                sk.pop_back();
+                if (!sk.empty())
+                {
+                    node = sk.back().node;
+                    sk.back().branch++;
+                }
+                else
+                {
+                    node = nullptr;
+                    break;
+                }
             }
         }
     }
 
-    void print(node_t *node)
-    {
-        if (node)
-        {
-            rect_t &rect = node->rect;
-            std::cout << rect.left << "," << rect.bottom << "," << rect.right << "," << rect.top << std::endl;
-            for (node_t *pn : node->childs)
-            {
-                print(pn);
-            }
-        }
-    }
+    node_t *node;
+    std::vector<node_iterator> sk;
+};
+
+class tree_layout
+{
+public:
+    static void clear(node_t *node);
+
+    static void apply(node_t *node);
+
+    static void print(node_t *node);
+
+    static iteraotr_t begin(node_t *node);
+
+    static iteraotr_t end();
+
+    static void restrict(node_t *node, void (*visit)(node_t *));
 };
 
 #endif
